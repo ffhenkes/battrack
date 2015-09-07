@@ -2,12 +2,22 @@ package battrack
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"testing"
 )
 
+type battrack struct {
+	out io.Writer
+}
+
+func (bt *battrack) Trace(a ...interface{}) {
+	bt.out.Write([]byte(fmt.Sprint(a...)))
+	bt.out.Write([]byte("\n"))
+}
+
 func New(w io.Writer) BatTracker {
-	return nil
+	return &battrack{out: w}
 }
 
 func TestNew(t *testing.T) {
