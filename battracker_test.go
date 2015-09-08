@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+/* Check the trace itself */
 func TestNew(t *testing.T) {
 
 	var buf bytes.Buffer
@@ -18,4 +19,10 @@ func TestNew(t *testing.T) {
 			t.Errorf("Trace should not write '%s'", buf.String)
 		}
 	}
+}
+
+/* Check disabling the trace */
+func TestOff(t *testing.T) {
+	var silent BatTracker = Off()
+	silent.Trace("silent")
 }
